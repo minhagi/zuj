@@ -79,6 +79,73 @@
                 .layout-sidebar.expanded .layout-tabmenu-tooltip {
                     display: none !important;
                 }
+                
+                /* Mobile responsive fixes */
+                @media (max-width: 768px) {
+                    .layout-sidebar {
+                        width: 0px !important;
+                        min-width: 0px !important;
+                        overflow: hidden;
+                        border: none;
+                        box-shadow: none;
+                        background: transparent;
+                    }
+                    
+                    .layout-sidebar.expanded {
+                        width: 100vw !important;
+                        min-width: 100vw !important;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        z-index: 9999;
+                        height: 100vh;
+                        background: #fff;
+                        box-shadow: none;
+                        border-right: none;
+                    }
+                    
+                    .layout-tabmenu {
+                        border: none;
+                        box-shadow: none;
+                        background: #fff;
+                    }
+                    
+                    .layout-tabmenu-nav {
+                        background: #fff;
+                        border: none;
+                    }
+                    
+                    .layout-tabmenu-contents {
+                        background: #fff;
+                        border: none;
+                        box-shadow: none;
+                    }
+                    
+                    /* Hide tooltips on mobile */
+                    .layout-tabmenu-tooltip {
+                        display: none !important;
+                    }
+                    
+                    /* Ensure no white edges */
+                    .layout-sidebar,
+                    .layout-sidebar * {
+                        border: none !important;
+                        box-shadow: none !important;
+                        outline: none !important;
+                    }
+                    
+                    /* Mobile overlay */
+                    .layout-sidebar.expanded::before {
+                        content: '';
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100vw;
+                        height: 100vh;
+                        background: rgba(0, 0, 0, 0.5);
+                        z-index: -1;
+                    }
+                }
             </style>
             <!-- Fix empty icons with JavaScript -->
             <script>
