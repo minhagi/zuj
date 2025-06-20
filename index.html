@@ -5,7 +5,138 @@
             
             <link rel="shortcut icon" type="image/x-icon" href="https://portal.zuj.edu.jo/resources/barcelona-layout/images/x-icon.jpeg">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-            <meta name="apple-mobile-web-app-capable" content="yes"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/theme.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/font-awesome.css"><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/jquery.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/jquery-plugins.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/core.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/components.js.download"></script><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/components.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/charts.css"><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/charts.js.download"></script><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/scrollpanel.css"><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/scrollpanel.js.download"></script><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/nanoscroller.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/animate.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/ripple.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/custom_edu.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/layout-green.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/custom_ar.css"><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='ar';}</script>
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <!-- Font Awesome CDN -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <!-- Material Icons CDN -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+            <!-- Custom fixes for missing icons -->
+            <style>
+                /* Fix empty material icons in sidebar */
+                .navigation-menu li:nth-child(1) .material-icons:empty::before { content: "home"; }
+                .navigation-menu li:nth-child(2) .material-icons:empty::before { content: "settings"; }
+                .navigation-menu li:nth-child(2) ul li:nth-child(1) .material-icons:empty::before { content: "brightness_high"; }
+                .navigation-menu li:nth-child(2) ul li:nth-child(2) .material-icons:empty::before { content: "brightness_low"; }
+                .navigation-menu li:nth-child(2) ul li:nth-child(3) .material-icons:empty::before { content: "view_list"; }
+                .navigation-menu li:nth-child(2) ul li:nth-child(4) .material-icons:empty::before { content: "layers"; }
+                .navigation-menu li:nth-child(3) .material-icons:empty::before { content: "language"; }
+                .navigation-menu li:nth-child(3) ul li .material-icons:empty::before { content: "translate"; }
+                .navigation-menu li:nth-child(4) .material-icons:empty::before { content: "palette"; }
+                .navigation-menu li:nth-child(4) ul li .material-icons:empty::before { content: "color_lens"; }
+                .navigation-menu li:nth-child(6) .material-icons:empty::before { content: "school"; }
+                .navigation-menu li:nth-child(8) .material-icons:empty::before { content: "person"; }
+                .navigation-menu li:nth-child(10) .material-icons:empty::before { content: "assignment"; }
+                .navigation-menu li:nth-child(12) .material-icons:empty::before { content: "link"; }
+                
+                /* Fix sidebar layout */
+                .layout-sidebar { min-width: 250px; }
+                .layout-tabmenu-nav { display: flex; flex-direction: column; }
+                .navigation-menu { list-style: none; padding: 0; margin: 0; }
+                .navigation-menu li { margin: 5px 0; }
+                .material-icons { font-family: 'Material Icons'; font-size: 18px; }
+                
+                /* Collapse sidebar by default */
+                .layout-sidebar {
+                    width: 60px !important;
+                    min-width: 60px !important;
+                    transition: width 0.3s ease;
+                }
+                
+                .layout-tabmenu-contents {
+                    display: none !important;
+                }
+                
+                .layout-tabmenu-nav li {
+                    position: relative;
+                }
+                
+                .layout-tabmenu-tooltip {
+                    display: block !important;
+                    position: absolute;
+                    left: 70px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 1000;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.3s ease;
+                }
+                
+                .layout-tabmenu-nav li:hover .layout-tabmenu-tooltip {
+                    opacity: 1;
+                }
+                
+                /* Expanded state when needed */
+                .layout-sidebar.expanded {
+                    width: 250px !important;
+                    min-width: 250px !important;
+                }
+                
+                .layout-sidebar.expanded .layout-tabmenu-contents {
+                    display: block !important;
+                }
+                
+                .layout-sidebar.expanded .layout-tabmenu-tooltip {
+                    display: none !important;
+                }
+            </style>
+            <!-- Fix empty icons with JavaScript -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Fix empty material icons
+                    const emptyIcons = document.querySelectorAll('.material-icons:empty');
+                    const iconMap = {
+                        'الصفحة الرئيسية': 'home',
+                        'أوضاع القائمة': 'settings',
+                        'اللغة': 'language',
+                        'القوالب': 'palette',
+                        'أكاديمي': 'school',
+                        'شخصي': 'person',
+                        'التسجيل': 'assignment',
+                        'روابط خاصة بالطالب': 'link',
+                        'Light Menu': 'brightness_high',
+                        'Dark Menu': 'brightness_low',
+                        'Static Menu': 'view_list',
+                        'Overlay Menu': 'layers',
+                        'الانجليزية': 'translate',
+                        'العربية': 'translate'
+                    };
+                    
+                    emptyIcons.forEach(function(icon) {
+                        const parentLink = icon.closest('a');
+                        if (parentLink) {
+                            const spanText = parentLink.querySelector('span');
+                            if (spanText) {
+                                const text = spanText.textContent.trim();
+                                if (iconMap[text]) {
+                                    icon.textContent = iconMap[text];
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Add sidebar toggle functionality
+                    const sidebar = document.querySelector('.layout-sidebar');
+                    const topbarMenuButton = document.getElementById('topbar-menu-button');
+                    
+                    if (topbarMenuButton && sidebar) {
+                        topbarMenuButton.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            sidebar.classList.toggle('expanded');
+                        });
+                    }
+                    
+                    // Close sidebar when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (sidebar && sidebar.classList.contains('expanded')) {
+                            if (!sidebar.contains(e.target) && !topbarMenuButton.contains(e.target)) {
+                                sidebar.classList.remove('expanded');
+                            }
+                        }
+                    });
+                });
+            </script>
+            <link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/theme.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/font-awesome.css"><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/jquery.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/jquery-plugins.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/core.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/components.js.download"></script><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/components.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/charts.css"><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/charts.js.download"></script><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/scrollpanel.css"><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/scrollpanel.js.download"></script><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/nanoscroller.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/animate.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/ripple.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/custom_edu.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/layout-green.css"><link type="text/css" rel="stylesheet" href="./جامعة الزيتونة الأردنية_files/custom_ar.css"><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='ar';}</script>
         <title>جامعة الزيتونة الأردنية</title><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/nanoscroller.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/layout.js.download"></script><script type="text/javascript" src="./جامعة الزيتونة الأردنية_files/common.js.download"></script></head><body class="main-body" dir="RTL">  
             <div class="layout-wrapper  layout-rtl">
 
